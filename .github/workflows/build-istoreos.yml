@@ -108,6 +108,9 @@ jobs:
 
     - name: 安装 feeds
       run: cd openwrt && ./scripts/feeds install -a
+    
+    - name: 列出 helloworld 内容
+      run: cd openwrt && ./scripts/feeds list -p helloworld
 
     - name: 加载自定义配置
       env:
