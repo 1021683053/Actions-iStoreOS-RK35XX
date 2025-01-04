@@ -103,15 +103,16 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
 
+    - name: 安装全量 helloworld
+      run: cd openwrt && ./scripts/feeds update helloworld && ./scripts/feeds install -a -f -p helloworld && sed -i "/helloworld/d" "feeds.conf.default"
+    
     - name: 更新 feeds
       run: cd openwrt && ./scripts/feeds update -a
 
     - name: 安装 feeds
       run: cd openwrt && ./scripts/feeds install -a
     
-    - name: 安装全量 helloworld
-      run: cd openwrt && ./scripts/feeds update helloworld && ./scripts/feeds install -a -f -p helloworld
-    
+
     - name: 加载自定义配置
       env:
         CONFIG_FILE_PATH: ${{ matrix.ARCHITECTURE }}/${{ env.CONFIG_FILE }}
