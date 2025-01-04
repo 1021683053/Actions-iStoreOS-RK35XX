@@ -110,7 +110,7 @@ jobs:
       run: cd openwrt && ./scripts/feeds install -a
 
     - name: 安装全量 helloworld
-      run: cd openwrt && ./scripts/feeds update helloworld && ./scripts/feeds install -a -f -p helloworld && sed -i "/helloworld/d" "feeds.conf.default" && cat logs/feeds/helloworld/hysteria/dump.txt
+      run: cd openwrt && ./scripts/feeds update helloworld && ./scripts/feeds install -a -f -p helloworld && sed -i "/helloworld/d" "feeds.conf.default"
     
     
 
