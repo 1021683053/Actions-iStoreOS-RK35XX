@@ -8,8 +8,6 @@ on:
         description: 'SSH connection to Actions'
         required: false
         default: 'false'
-  schedule:
-   - cron: 0 16 * * *
 
 env:
   REPO_URL: https://github.com/istoreos/istoreos
@@ -107,6 +105,15 @@ jobs:
 
     - name: 更新 feeds
       run: cd openwrt && ./scripts/feeds update -a
+
+    - name: 删除部分内容
+      run: |
+        cd openwrt
+        rm -rf feeds/luci/applications/luci-app-mosdns
+        rm -rf feeds/packages/net/{alist,adguardhome,mosdns,xray*,v2ray*,v2ray*,sing*,smartdns}
+        rm -rf feeds/packages/utils/v2dat
+        rm -rf feeds/packages/lang/golang
+        git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 
     - name: 安装 feeds
       run: cd openwrt && ./scripts/feeds install -a
